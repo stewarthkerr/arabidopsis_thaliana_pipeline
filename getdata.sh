@@ -2,7 +2,8 @@
 
 # NOTE: start from the main folder, (e.g., project-team-12)
 
-#mkdir data # create "data" folder
+mkdir data # create "data" folder
+
 cp SNP_data_list.txt data/SNP_data_list.txt # copy SNP_data_list.txt into "data" folder.
 
 cd data # go to "data" folder
