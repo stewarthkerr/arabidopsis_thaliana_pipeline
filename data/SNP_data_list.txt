@@ -1,0 +1,218 @@
+Accession	Stock ID	Sequenced by	Platform	Status	Alt name
+Aa_0	CS76428	Salk	Illumina	Released	CS6600
+Abd_0	CS76429	Salk	Illumina	Released	CS932
+Ag_0	CS76430	Salk	Illumina	Released	CS22630
+Ak_1	CS76431	Salk	Illumina	Released	CS6602
+Alst_1	CS76432	Salk	Illumina	Released	CS22550
+Altai_5	CS76433	Salk	Illumina	Released	548AV
+Amel_1	CS76434	Salk	Illumina	Released	CS22526
+An_1	CS76435	Salk	Illumina	Released	CS22626
+Ang_0	CS76436	Salk	Illumina	Released	CS6605
+Anholt_1	CS76437	Salk	Illumina	Released	CS22313
+Ann_1	CS76438	Salk	Illumina	Released	CS22520
+Anz_0	CS76439	Salk	Illumina	Released	N/A
+Appt_1	CS76440	Salk	Illumina	Released	CS22528
+Ba_1	CS76441	Salk	Illumina	Released	CS952
+Baa_1	CS76442	Salk	Illumina	Released	CS22529
+Bch_1	CS76444	Salk	Illumina	Released	CS6609
+Bd_0	CS76445	Salk	Illumina	Released	CS962
+Benk_1	CS76447	Salk	Illumina	Released	CS22530
+Ber	CS76448	Salk	Illumina	Released	CS3109
+Bg_2	CS28069	Salk	Illumina	Released	CS28069
+Bik_1	CS76449	Salk	Illumina	Released	541AV
+Bl_1	CS76450	Salk	Illumina	Released	CS968
+Bla_1	CS76451	Salk	Illumina	Released	CS970
+Boot_1	CS76452	Salk	Illumina	Released	CS22551
+Bor_1	CS76453	Salk	Illumina	Released	CS22590
+Bor_4	CS76454	Salk	Illumina	Released	CS22591
+Br_0	CS76455	Salk	Illumina	Released	CS22628
+Bs_1		Salk	Illumina	Released	CS6627
+Bsch_0	CS76457	Salk	Illumina	Released	CS6630
+Bu_0	CS76458	Salk	Illumina	Released	CS6632
+Buckhorn_Pass	CS28123	Salk	Illumina	Released	CS28123
+CIBC_17	CS28154	Salk	Illumina	Released	CS28154
+CIBC_5		Salk	Illumina	Released	CS22602
+Ca_0	CS76459	Salk	Illumina	Released	CS6658
+Cal_0	CS76460	Salk	Illumina	Released	CS1062
+Cerv_1	CS76462	Salk	Illumina	Released	CS22523
+Chat_1	CS76463	Salk	Illumina	Released	CS22521
+Chi_0	CS76464	Salk	Illumina	Released	CS1072
+Cnt_1	CS76467	Salk	Illumina	Released	CS1635
+Co	CS28161	Salk	Illumina	Released	CS28161
+Co_1	CS76468	Salk	Illumina	Released	CS6669
+Com_1	CS76469	Salk	Illumina	Released	CS22522
+Cvi_0	CS28198	Salk	Illumina	Released	CS28198
+Da1_12	CS76470	Salk	Illumina	Released	CS917
+Db_1	CS76471	Salk	Illumina	Released	CS6678
+Dem_4		Salk	Illumina	Released
+Di_G	CS76472	Salk	Illumina	Released	CS910
+Dja_1	CS76473	Salk	Illumina	Released	534AV
+Do_0	CS76474	Salk	Illumina	Released	CS6683
+Dr_0	CS76475	Salk	Illumina	Released	CS6684
+DraIII_1		Salk	Illumina	Released
+DraII_1		Salk	Illumina	Released
+Dra_0	CS76476	Salk	Illumina	Released	CS6685
+Duk		Salk	Illumina	Released
+Durh_1	CS76477	Salk	Illumina	Released	CS22552
+Ei_2	CS76478	Salk	Illumina	Released	CS22616
+El_0	CS76479	Salk	Illumina	Released	CS6694
+Ema_1	CS76480	Salk	Illumina	Released	CS1637
+En_1	CS28233	Salk	Illumina	Released	CS28233
+En_2	CS76481	Salk	Illumina	Released	CS1138
+En_D	CS76482	Salk	Illumina	Released	CS920
+Er_0	CS76483	Salk	Illumina	Released	CS6698
+Es_0	CS76484	Salk	Illumina	Released	CS1144
+Est	CS76485	Salk	Illumina	Released	CS6173
+Et_0	CS76486	Salk	Illumina	Released	CS6702
+Etna_2	CS76487	Salk	Illumina	Released	N/A
+Fi_0	CS76488	Salk	Illumina	Released	CS6704
+Fr_2	CS76489	Salk	Illumina	Released	CS6708
+Ga_0	CS76490	Salk	Illumina	Released	CS22634
+Ge_0	CS28276	Salk	Illumina	Released	CS28276
+Gel_1	CS76492	Salk	Illumina	Released	CS22533
+Gie_0	CS76493	Salk	Illumina	Released	CS6720
+Gifu_2	CS76494	Salk	Illumina	Released	CS3963
+Got_22	CS28307	Salk	Illumina	Released	CS28307
+Got_7		Salk	Illumina	Released	CS22608
+Gr_1	CS76496	Salk	Illumina	Released	CS1198
+Gre_0	CS76497	Salk	Illumina	Released	CS6729
+Gu_0	CS76498	Salk	Illumina	Released	CS22617
+Gy_0		Salk	Illumina	Released	CS22631
+HR_10	CS28355	Salk	Illumina	Released	CS28355
+HR_5	CS76514	Salk	Illumina	Released	CS22596
+HSm		Salk	Illumina	Released
+Ha_0	CS76500	Salk	Illumina	Released	CS6733
+Hau_0	CS76509	Salk	Illumina	Released	CS1220
+Hey_1	CS76511	Salk	Illumina	Released	CS22534
+Hh_0	CS76512	Salk	Illumina	Released	CS6735
+Hn_0	CS76513	Salk	Illumina	Released	CS6739
+Hod	CS28351	Salk	Illumina	Released	CS28351
+Hs_0	CS76515	Salk	Illumina	Released	CS6905
+In_0		Salk	Illumina	Released	CS1238
+Is_0	CS76517	Salk	Illumina	Released	CS1240
+Je_0	CS76518	Salk	Illumina	Released	CS6742
+Jl_3	CS76519	Salk	Illumina	Released	CS6745
+Jm_0	CS76520	Salk	Illumina	Released	CS6748
+Kar_1	CS76522	Salk	Illumina	Released	531AV
+Kas_1	CS76523	Salk	Illumina	Released	CS22638
+Kas_2	CS28379	Salk	Illumina	Released	CS28379
+Kb_0	CS76524	Salk	Illumina	Released	CS6753
+Kelsterbach_4	CS76525	Salk	Illumina	Released	CS6041
+Kent		Salk	Illumina	Released
+Kil_0	CS76526	Salk	Illumina	Released	CS1270
+Kin_0	CS76527	Salk	Illumina	Released	CS22654
+Kl_5	CS76528	Salk	Illumina	Released	CS6761
+Knox_10	CS28406	Salk	Illumina	Released	CS28406
+Knox_18	CS76530	Salk	Illumina	Released	CS22567
+Ko_2	CS76531	Salk	Illumina	Released	CS1288
+Koln		Salk	Illumina	Released
+Kondara	CS76532	Salk	Illumina	Released	Cs22651
+Kro_0	CS76533	Salk	Illumina	Released	CS6766
+Krot_0	CS76534	Salk	Illumina	Released	CS3886
+Kyoto	CS76535	Salk	Illumina	Released	CS3964
+Kz_9	CS76537	Salk	Illumina	Released	CS22607
+LL_0	CS28470	Salk	Illumina	Released	CS28470
+La_0	CS76538	Salk	Illumina	Released	CS1298
+Lan_0	CS76539	Salk	Illumina	Released	CS6768
+Le_0	CS76540	Salk	Illumina	Released	CS1308
+Li_2:1	CS76541	Salk	Illumina	Released	CS6772
+Lip_0	CS76542	Salk	Illumina	Released	CS1336
+Lisse		Salk	Illumina	Released
+Litva	CS76543	Salk	Illumina	Released	CS925
+Lm_2	CS76545	Salk	Illumina	Released	CS6784
+Lp2_2	CS76546	Salk	Illumina	Released	CS22594
+Lp2_6	CS28480	Salk	Illumina	Released	CS28480
+Mc_0	CS76548	Salk	Illumina	Released	CS1362
+Mh_0	CS76550	Salk	Illumina	Released	CS6792
+Mir_0	CS76551	Salk	Illumina	Released	CS1378
+Mnz_0	CS76552	Salk	Illumina	Released	CS1370
+Ms_0	CS76555	Salk	Illumina	Released	CS22655
+Mv_0	CS76556	Salk	Illumina	Released	CS1386
+Mz_0	CS76557	Salk	Illumina	Released	CS22636
+NC_6		Salk	Illumina	Released
+NFA_10		Salk	Illumina	Released
+NFA_8		Salk	Illumina	Released	CS22598
+N13		Salk	Illumina	Released	
+Nc_1	CS76559	Salk	Illumina	Released	CS1388
+Neo_6	CS76560	Salk	Illumina	Released	540AV
+Nok_3	CS76562	Salk	Illumina	Released	CS22643
+Np_0	CS76563	Salk	Illumina	Released	CS6806
+Nw_0	CS76564	Salk	Illumina	Released	CS6811
+Nz_1		Salk	Illumina	Released	CS22661
+Ob_0	CS76566	Salk	Illumina	Released	CS6816
+Old_1	CS76567	Salk	Illumina	Released	CS1426
+Or_0	CS76568	Salk	Illumina	Released	CS6822
+Ove_0	CS76569	Salk	Illumina	Released	CS6823
+PHW_2	CS28603	Salk	Illumina	Released	CS28603
+PHW_34	CS28634	Salk	Illumina	Released	CS28634
+Per_1	CS76571	Salk	Illumina	Released	CS1444
+Pi_0	CS76572	Salk	Illumina	Released	CS6832
+Pla_0	CS76573	Salk	Illumina	Released	CS1458
+Pna_17	CS76575	Salk	Illumina	Released	CS22570
+Pog_0	CS76576	Salk	Illumina	Released	CS6842
+Pro_0	CS76577	Salk	Illumina	Released	CS22649
+Pt_0		Salk	Illumina	Released	CS6843
+Pu2_23	CS76579	Salk	Illumina	Released	CS22593
+Pu2_7	CS76580	Salk	Illumina	Released	CS22592
+Pu2_8	CS28658	Salk	Illumina	Released	CS28658
+Qar_8a	CS76581	Salk	Illumina	Released	549AV
+RRS_7	CS76593	Salk	Illumina	Released	CS22564
+RRs_10	CS76592	Salk	Illumina	Released	CS22565
+Ra_0	CS76582	Salk	Illumina	Released	CS22632
+Ragl_1	CS76583	Salk	Illumina	Released	CS22558
+Rak_2	CS28668	Salk	Illumina	Released	CS28668
+Rd_0	CS76584	Salk	Illumina	Released	CS1482
+Ren_1	CS28674	Salk	Illumina	Released	CS28674
+Ren_11	CS28677	Salk	Illumina	Released	CS28677
+Rennes_1		Salk	Illumina	Released	CS22610
+Rhen_1		Salk	Illumina	Released	CS22536
+Rld_1	CS76588	Salk	Illumina	Released	CS913
+Rmx_A02	CS76589	Salk	Illumina	Released	CS22568
+Rmx_A180	CS28690	Salk	Illumina	Released	CS28690
+Rome_1	CS76590	Salk	Illumina	Released	CS22524
+Rou_0	CS76591	Salk	Illumina	Released	CS6847
+Rubeznhoe_1	CS76594	Salk	Illumina	Released	CS927
+Sap_0	CS76595	Salk	Illumina	Released	CS1506
+Se_0	CS76597	Salk	Illumina	Released	CS22646
+Seattle_0	CS76598	Salk	Illumina	Released	CS6188
+Sei_0	CS76599	Salk	Illumina	Released	CS1504
+Sf_1	CS28730	Salk	Illumina	Released	CS28730
+Sg_1	CS76600	Salk	Illumina	Released	CS6858
+Si_0	CS76601	Salk	Illumina	Released	CS1524
+Sorbo		Salk	Illumina	Released	CS22653
+Sp_0	CS76603	Salk	Illumina	Released	CS1530
+Sq_1	CS28746	Salk	Illumina	Released	CS28746
+Sq_8	CS76604	Salk	Illumina	Released	CS22601
+Stw_0	CS76605	Salk	Illumina	Released	CS1538
+Su_0	CS76606	Salk	Illumina	Released	CS1540
+Sus_1	CS76607	Salk	Illumina	Released	533AV
+Ta_0	CS76608	Salk	Illumina	Released	CS6867
+Tamm_2	CS76610	Salk	Illumina	Released	CS22604
+Tamm_27	CS28756	Salk	Illumina	Released	CS28756
+Tha_1		Salk	Illumina	Released	CS22537
+Ting_1	CS76612	Salk	Illumina	Released	CS22549
+Tol_0	CS76614	Salk	Illumina	Released	CS8020
+Ts_1	CS76615	Salk	Illumina	Released	CS22647
+Ts_5	CS28776	Salk	Illumina	Released	CS28776
+Tscha_1	CS76616	Salk	Illumina	Released	CS22518
+Tu_0	CS76617	Salk	Illumina	Released	CS1566
+Tul_0	CS76618	Salk	Illumina	Released	CS1570
+Ty_0	CS76619	Salk	Illumina	Released	CS1572
+Uk_1	CS76620	Salk	Illumina	Released	CS1574
+Uod_1	CS76621	Salk	Illumina	Released	CS22612
+Uod_7	CS28794	Salk	Illumina	Released	CS28794
+Utrecht	CS76622	Salk	Illumina	Released	CS6150
+Van_0	CS76623	Salk	Illumina	Released	CS6884
+Ven_1	CS76624	Salk	Illumina	Released	CS22538
+Vind_1	CS76625	Salk	Illumina	Released	CS22560
+Wa_1	CS76626	Salk	Illumina	Released	CS6885
+Wc_1	CS76627	Salk	Illumina	Released	CS6886
+Wei_0	CS76628	Salk	Illumina	Released	CS22622
+Westkar_4	CS76629	Salk	Illumina	Released	N/A
+Wil_1	CS28819	Salk	Illumina	Released	CS28819
+Wl_0	CS76630	Salk	Illumina	Released	CS6920
+Ws_2	CS76631	Salk	Illumina	Released	CS22659
+Wt_5	CS76632	Salk	Illumina	Released	CS22637
+Yo_0	CS76633	Salk	Illumina	Released	CS1622
+Zal_1	CS76634	Salk	Illumina	Released	536AV
+Zdr_1	CS76635	Salk	Illumina	Released	CS22588
