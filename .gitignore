@@ -1,2 +1,5 @@
 #Data files pulled from #1001 Genomes
 quality_variant_*
+
+#Reference genome
+*.fas

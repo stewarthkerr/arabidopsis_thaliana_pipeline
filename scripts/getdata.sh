@@ -6,7 +6,8 @@ cd "$(dirname "$0")"/..
 mkdir -p data
 
 #Step 2: Download reference genome
-#Doing this before Step 1 below because it's quicker
+#-P lets us specify download directory, -N says don't download if file already downloaded
+wget -N --timestamping -P data/ ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/*.fas
 
 #Pull list of variants from 1001 genomes, save to data/quality_variant_list.txt
 wget -O - http://signal.salk.edu/atg1001/download.php |
@@ -19,3 +20,5 @@ while read vname
   done < data/quality_variant_list.txt
 
 #MAYBE: Add a check to make sure all files were downloaded
+#Do the check before downloading and after downloading. If files already exist
+#then we don't need to redownload
