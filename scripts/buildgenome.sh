@@ -25,17 +25,26 @@ fi
 
 #Short check on genome length
 #Maybe make ending position take last position of chromosome
-bp=$(wc -c data/TAIR10_chr$1.fas | cut -f1 -d' '); echo $bp
-if [[ ($2 -gt $bp) ]]; then
+maxbp=$(wc -c data/TAIR10_chr$1.fas | cut -f1 -d' ')
+if [[ ($2 -gt $maxbp) ]]; then
   echo "chr$1 does not have that many base pairs. Reduce starting position."; exit 1
-elif [[ ($3 -gt $bp) ]]; then
+elif [[ ($3 -gt $maxbp) ]]; then
   echo "chr$1 does not have that many base pairs. Reduce ending position"; exit 1
 fi
 
-#pad start and end position to 8 digits
+#pad start and end position to 8 digits, calculate length
 sp=$(printf %08d $2)
 ep=$(printf %08d $3)
+((length = $3 - $2 + 1)) #Add 1 because genome includes starting bp
 
 #Create the .phy file which will hold the genome -- pad to 8 digits
 #Note that if the file already exists, then this will delete the old file
 truncate -s 0 alignments/chr${1}_${sp}_to_${ep}.phy
+
+#Pull base pairs from reference genome and stash in variable
+bp=$(tail -n +2 data/TAIR10_chr$1.fas | head -c $3 | tail -c $length)
+
+#Create line for each variant by editing reference genome
+for variant in data/quality_variant_*; do
+  #name=(cut )
+done
