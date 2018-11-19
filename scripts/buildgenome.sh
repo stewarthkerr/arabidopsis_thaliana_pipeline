@@ -32,18 +32,11 @@ elif [[ ($3 -gt $maxbp) ]]; then
   echo "chr$1 does not have that many base pairs. Reduce ending position"; exit 1
 fi
 
-#pad start and end position to 8 digits, calculate length
-sp=$(printf %08d $2)
-ep=$(printf %08d $3)
-((length = $3 - $2 + 1)) #Add 1 because genome includes starting bp
-
-#Create the .phy file which will hold the genome -- pad to 8 digits
-#Note that if the file already exists, then this will delete the old file
-truncate -s 0 alignments/chr${1}_${sp}_to_${ep}.phy
 
 #Pull base pairs from reference genome and stash in variable
 #NOTE: tr removes spaces, might be problematic!!!
-seq=$(tail -n +2 data/TAIR10_chr$1.fas | head -c $3 | tail -c $length | tr -d ' ')
+((length = $3 - $2 + 1)) #Add 1 because genome includes starting bp
+seq=$(tail -n +2 data/TAIR10_chr$1.fas | tr -d ' ' | head -c $3 | tail -c $length )
 
 #Create line for each variant by editing reference genome
 for variant in data/quality_variant_*; do
@@ -70,3 +63,11 @@ for variant in data/quality_variant_*; do
   done
 
 done
+
+#pad start and end position to 8 digits,
+sp=$(printf %08d $2)
+ep=$(printf %08d $3)
+
+#Create the .phy file which will hold the genome -- pad to 8 digits
+#Note that if the file already exists, then this will delete the old file
+truncate -s 0 alignments/chr${1}_${sp}_to_${ep}.phy
