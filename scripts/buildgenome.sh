@@ -42,9 +42,31 @@ ep=$(printf %08d $3)
 truncate -s 0 alignments/chr${1}_${sp}_to_${ep}.phy
 
 #Pull base pairs from reference genome and stash in variable
-bp=$(tail -n +2 data/TAIR10_chr$1.fas | head -c $3 | tail -c $length)
+#NOTE: tr removes spaces, might be problematic!!!
+seq=$(tail -n +2 data/TAIR10_chr$1.fas | head -c $3 | tail -c $length | tr -d ' ')
 
 #Create line for each variant by editing reference genome
 for variant in data/quality_variant_*; do
-  #name=(cut )
+  #Pull each of the changes that need to be done
+  #changes variable: #BP to change:old BP:new BP
+  changes=$(awk -v chr=$1 -v sp=$2 -v ep=$3 '{if (NR > 1 && $2 ~ chr && $3 > sp && $3 < ep)
+  changes = changes $3 ":" $4 ":" $5 ","}
+  END {print changes}' $variant)
+  echo $changes
+
+  #Get total number of changes to be performed
+  numchanges=$(echo $changes | grep -o ',' | wc -l)
+  echo $numchanges
+
+  #Perform the change - loop through each change in $changes
+  new_seq=$seq
+  for i in `seq 1 $numchanges`; do
+    change_i=$(echo $changes | cut -d ',' -f $i )
+    position=$(echo $change_i | cut -d ':' -f 1)
+    new_bp=$(echo $change_i | cut -d ':' -f 3 )
+    echo $new_seq
+    #There's a problem with the sed below. Gotta fix
+    new_seq=$(echo $newseq | sed s/./${new_bp}/$position)
+  done
+
 done
