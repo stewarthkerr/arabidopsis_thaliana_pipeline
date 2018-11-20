@@ -25,7 +25,7 @@ fi
 
 #Short check on genome length
 #Maybe make ending position take last position of chromosome
-maxbp=$(wc -c data/TAIR10_chr$1.fas | cut -f1 -d' ')
+maxbp=$(wc -c data/reference/TAIR10_chr$1.fas | cut -f1 -d' ')
 if [[ ($2 -gt $maxbp) ]]; then
   echo "chr$1 does not have that many base pairs. Reduce starting position."; exit 1
 elif [[ ($3 -gt $maxbp) ]]; then
@@ -33,9 +33,8 @@ elif [[ ($3 -gt $maxbp) ]]; then
 fi
 
 #Pull base pairs from reference genome and stash in variable
-#NOTE: tr removes spaces, might be problematic!!!
 ((length = $3 - $2 + 1)) #Add 1 because genome includes starting bp
-seq=$(tail -n +2 data/TAIR10_chr$1.fas | tr -d '\040\011\012\015' | head -c $3 | tail -c $length )
+seq=$(tail -n +2 data/reference/TAIR10_chr$1.fas | tr -d '\040\011\012\015' | head -c $3 | tail -c $length )
 
 #pad start and end position to 8 digits,
 sp=$(printf %08d $2)
@@ -46,7 +45,7 @@ truncate -s 0 alignments/chr${1}_${sp}_to_${ep}.phy
 
 ((num_variant = 0))
 #Create line for each variant by editing reference genome
-for variant in data/quality_variant_*; do
+for variant in data/quality_variants/quality_variant_*; do
   #strip directory and .txt from variant name
   vname=$(echo $variant | grep -Eo "[A-Z][^/.]+")
 

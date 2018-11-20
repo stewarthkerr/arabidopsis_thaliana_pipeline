@@ -5,7 +5,7 @@ cd "$(dirname "$0")"/..
 #Creates data directory, -p means it won't throw an error if /data already exists
 mkdir -p data
 mkdir -p data/reference
-mkdir -p data/quality_variant
+mkdir -p data/quality_variants
 
 #Step 2: Download reference genome
 #-P lets us specify download directory, -N says don't download if file already downloaded
@@ -18,7 +18,7 @@ wget -O - http://signal.salk.edu/atg1001/download.php |
 #Pulls SNP data from 1001 genome
 while read vname
   do
-    wget -N --timestamping -P data/quality_variant http://signal.salk.edu/atg1001/data/Salk/quality_variant_$vname.txt
+    wget -N --timestamping -P data/quality_variants http://signal.salk.edu/atg1001/data/Salk/quality_variant_$vname.txt
   done < data/quality_variant_list.txt
 
 #MAYBE: Add a check to make sure all files were downloaded
