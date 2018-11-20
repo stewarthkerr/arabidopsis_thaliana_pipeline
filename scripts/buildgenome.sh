@@ -32,42 +32,56 @@ elif [[ ($3 -gt $maxbp) ]]; then
   echo "chr$1 does not have that many base pairs. Reduce ending position"; exit 1
 fi
 
-
 #Pull base pairs from reference genome and stash in variable
 #NOTE: tr removes spaces, might be problematic!!!
 ((length = $3 - $2 + 1)) #Add 1 because genome includes starting bp
-seq=$(tail -n +2 data/TAIR10_chr$1.fas | tr -d ' ' | head -c $3 | tail -c $length )
+seq=$(tail -n +2 data/TAIR10_chr$1.fas | tr -d '\040\011\012\015' | head -c $3 | tail -c $length )
 
+#pad start and end position to 8 digits,
+sp=$(printf %08d $2)
+ep=$(printf %08d $3)
+#Create the .phy file which will hold the genome -- pad to 8 digits
+#Note that if the file already exists, then this will delete the old file
+truncate -s 0 alignments/chr${1}_${sp}_to_${ep}.phy
+
+((num_variant = 0))
 #Create line for each variant by editing reference genome
 for variant in data/quality_variant_*; do
+  #strip directory and .txt from variant name
+  vname=$(echo $variant | grep -Eo "[A-Z][^/.]+")
+
+  #increment number of variants
+  ((num_variant++))
+
   #Pull each of the changes that need to be done
   #changes variable: #BP to change:old BP:new BP
   changes=$(awk -v chr=$1 -v sp=$2 -v ep=$3 '{if (NR > 1 && $2 ~ chr && $3 > sp && $3 < ep)
-  changes = changes $3 ":" $4 ":" $5 ","}
-  END {print changes}' $variant)
-  echo $changes
+    changes = changes $3 ":" $4 ":" $5 ","}
+    END {print changes}' $variant)
 
   #Get total number of changes to be performed
   numchanges=$(echo $changes | grep -o ',' | wc -l)
-  echo $numchanges
 
   #Perform the change - loop through each change in $changes
   new_seq=$seq
   for i in `seq 1 $numchanges`; do
     change_i=$(echo $changes | cut -d ',' -f $i )
-    position=$(echo $change_i | cut -d ':' -f 1)
+    position=$(echo $change_i | cut -d ':' -f 1 )
+    let "position=position-1" #Need to decrement by 1 to to sed match before change
+    old_bp=$(echo $change_i | cut -d ':' -f 2 )
     new_bp=$(echo $change_i | cut -d ':' -f 3 )
-    echo $new_seq
-    #There's a problem with the sed below. Gotta fix
-    new_seq=$(echo $newseq | sed s/./${new_bp}/$position)
+
+    #Would LIKE to add a check on old_bp to make sure we're replacing the right thing
+    tempseq=$(echo $new_seq | sed -E "s/^(.{$position}).(.*)$/\1$new_bp\2/")
+    new_seq=$tempseq
   done
+
+  #Output to screen to show it's still working
+  echo $vname,$numchanges,$changes
+  #Output a line for this variant
+  echo $vname' '$new_seq >> alignments/chr${1}_${sp}_to_${ep}.phy
 
 done
 
-#pad start and end position to 8 digits,
-sp=$(printf %08d $2)
-ep=$(printf %08d $3)
-
-#Create the .phy file which will hold the genome -- pad to 8 digits
-#Note that if the file already exists, then this will delete the old file
-truncate -s 0 alignments/chr${1}_${sp}_to_${ep}.phy
+#Add the first line to the file
+sed -i "1 i $num_variant $length" alignments/chr${1}_${sp}_to_${ep}.phy
