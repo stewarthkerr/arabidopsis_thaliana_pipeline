@@ -76,7 +76,7 @@ for variant in data/quality_variants/quality_variant_*; do
   done
 
   #Output to screen to show it's still working
-  echo $vname,$numchanges,$changes
+  echo $vname, Number of changes: $numchanges
   #Output a line for this variant
   echo $vname' '$new_seq >> alignments/chr${1}_${sp}_to_${ep}.phy
 

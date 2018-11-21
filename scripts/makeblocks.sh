@@ -2,11 +2,12 @@
 #Use dirname to set the wd to where the script is located, and then go up a level
 cd "$(dirname "$0")"/..
 
-#Takes 4 arguments (3 required, 4th optional)
+#Takes 5 arguments (3 required, 4th/5th optional)
 # 1: Chromosome (1-5, C, or M)
 # 2: Starting block
 # 3: Number of blocks to produce
-# 4: Optional flag: -c = all trees for given chromosome, -a = all trees for all chromosomes
+#4 : blocklength (Need to add still)
+# 5: Optional flag: -b = all blocks for given chromosome, -a = all blocks for all chromosomes
 
 #Check to make sure 3 arguments were supplied
 #If time: check to make sure 2 and 3 are VALID integers
@@ -34,9 +35,13 @@ fi
 ((sp=(($2-1)*10000)+1))
 
 #Calculate ending position -for file name
-((ep=($sp-1)+($3*10000))
+((ep=($sp-1)+($3*10000)))
 
-echo ../alignments/chr${1}_${sp}_to_${ep}.phy
-
-#Call iqtree for the specified alignments
-#iqtree -s ../alignments/chr$1_(($2*10000))_to_(($3*10000)).phy --no-outfiles -djc -m HKY+G -nt AUTO -pre iqtree/chr$1
+### I THINK THERE'S AN ISSUE BECAUSE I'M USING SP AND EP IN BOTH THIS AND BUILDGENOME.SH
+for index in `seq $sp 10000 $ep`; do
+  file_sp=$(printf %08d $index)
+  ((end_index=index+9999))
+  file_ep=$(printf %08d $end_index)
+  echo Calculating block chr${1}_${file_sp}_to_${file_ep}
+  bash scripts/buildgenome.sh $1 $index $end_index
+done
