@@ -32,13 +32,13 @@ fi
     #iqtree -s $alignment_fname --no-outfiles -djc -m HKY+G -nt AUTO -pre ../iqtree
 
 #Calculate starting position - used to determine which file to use
-((sp=(($2-1)*10000)+1))
+((mb_sp=(($2-1)*10000)+1))
 
 #Calculate ending position -for file name
-((ep=($sp-1)+($3*10000)))
+((mb_ep=($sp-1)+($3*10000)))
 
 ### I THINK THERE'S AN ISSUE BECAUSE I'M USING SP AND EP IN BOTH THIS AND BUILDGENOME.SH
-for index in `seq $sp 10000 $ep`; do
+for index in `seq $mb_sp 10000 $mb_ep`; do
   file_sp=$(printf %08d $index)
   ((end_index=index+9999))
   file_ep=$(printf %08d $end_index)
