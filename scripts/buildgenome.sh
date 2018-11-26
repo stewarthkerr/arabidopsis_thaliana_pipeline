@@ -44,7 +44,8 @@ pad_sp=$(printf %08d $2)
 pad_ep=$(printf %08d $ep)
 #Create the .phy file which will hold the genome -- pad to 8 digits
 #Note that if the file already exists, then this will delete the old file
-truncate -s 0 alignments/chr${1}_${pad_sp}_to_${pad_ep}.phy
+mkdir -p alignments/chr${1}
+truncate -s 0 alignments/chr${1}/chr${1}_${pad_sp}_to_${pad_ep}.phy
 
 ((num_variant = 0))
 #Create line for each variant by editing reference genome
@@ -82,9 +83,9 @@ for variant in data/quality_variants/quality_variant_*; do
   done
 
   #Write a line to file for this variant
-  echo $vname' '$new_seq >> alignments/chr${1}_${pad_sp}_to_${pad_ep}.phy
+  echo $vname' '$new_seq >> alignments/chr${1}/chr${1}_${pad_sp}_to_${pad_ep}.phy
 
 done
 
 #Add the first line to the file
-sed -i "1 i $num_variant $length" alignments/chr${1}_${pad_sp}_to_${pad_ep}.phy
+sed -i "1 i $num_variant $length" alignments/chr${1}/chr${1}_${pad_sp}_to_${pad_ep}.phy
