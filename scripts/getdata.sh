@@ -24,3 +24,6 @@ while read vname
 #MAYBE: Add a check to make sure all files were downloaded
 #Do the check before downloading and after downloading. If files already exist
 #then we don't need to redownload
+
+# change file name for strain Li_2:1
+mv ../data/quality_variants/quality_variant_Li_2%3A1.txt ../data/quality_variants/quality_variant_Li_2_1.txt
