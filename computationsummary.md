@@ -1,0 +1,7 @@
+# Computation summary
+
+## Chromosome M Trees
+Created on Stewart's laptop. Took approximately 2 hours
+
+## Chromosome C trees
+Created on Stewart's laptop. Took approximately 30 minutes.

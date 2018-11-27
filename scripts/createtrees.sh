@@ -30,8 +30,7 @@ fi
     #iqtree -s $alignment_fname --no-outfiles -djc -m HKY+G -nt AUTO -pre ../iqtree
 
 #Construct the blocks using makeblocks.sh
-#Fourth argument tells makeblocks to make the trees
-bash scripts/makeblocks.sh $1 $2 $3
+#bash scripts/makeblocks.sh $1 $2 $3
 
 #Calculate starting position - used to determine which file to use
 ((ct_sp=(($2-1)*10000)+1))
@@ -55,6 +54,9 @@ for index in `seq $ct_sp 10000 $ct_ep`; do
   #Print message to screen to show that it's working
   file_sp=$(printf %08d $index)
   ((end_index=index+9999))
+  if [[ ($end_index -gt $lastbp) ]]; then #Handles the last tree
+    end_index=$lastbp
+  fi
   file_ep=$(printf %08d $end_index)
   echo Constructing tree chr${1}_${file_sp}_to_${file_ep}
 
