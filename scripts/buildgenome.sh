@@ -38,6 +38,10 @@ fi
 #Pull base pairs from reference genome and stash in variable
 ((length = $ep - $2 + 1)) #Add 1 because genome includes starting bp
 seq=$(tail -n +2 data/reference/TAIR10_chr$1.fas | tr -d '\040\011\012\015' | head -c $3 | tail -c $length )
+for i in `seq 1 $length`;do
+  ((x=i-1))
+  seq_array[i]=${seq:x:1}
+done
 
 #pad start and end position to 8 digits,
 pad_sp=$(printf %08d $2)
@@ -69,18 +73,17 @@ for variant in data/quality_variants/quality_variant_*; do
   echo $vname, Number of changes: $numchanges
 
   #Perform the change - loop through each change in $changes
-  new_seq=$seq
+  temp_seq=("${seq_array[@]}")
   for i in `seq 1 $numchanges`; do
     change_i=$(echo $changes | cut -d ',' -f $i )
     position=$(echo $change_i | cut -d ':' -f 1 )
-    let "position=position-$2" #Need to decrement by starting position
-    old_bp=$(echo $change_i | cut -d ':' -f 2 )
+    #old_bp=$(echo $change_i | cut -d ':' -f 2 )
     new_bp=$(echo $change_i | cut -d ':' -f 3 )
 
-    #Would LIKE to add a check on old_bp to make sure we're replacing the right thing
-    tempseq=$(echo $new_seq | sed -E "s/^(.{$position}).(.*)$/\1$new_bp\2/")
-    new_seq=$tempseq
+    temp_seq[$position]=$new_bp
   done
+
+  new_seq=$(echo ${temp_seq[*]} | tr -d '\040\011\012\015')
 
   #Write a line to file for this variant
   echo $vname' '$new_seq >> alignments/chr${1}/chr${1}_${pad_sp}_to_${pad_ep}.phy
