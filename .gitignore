@@ -10,3 +10,6 @@ TAIR*
 
 #Alignment files
 *.phy
+
+#__pycache__
+/scripts/__pycache__/*
