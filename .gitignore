@@ -7,3 +7,6 @@ TAIR*
 #IQ Tree files that we don't care about
 *uniqueseq.phy
 *ckp.gz
+
+#Alignment files
+*.phy
