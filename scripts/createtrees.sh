@@ -61,6 +61,6 @@ for index in `seq $ct_sp 10000 $ct_ep`; do
   echo Constructing tree chr${1}_${file_sp}_to_${file_ep}
 
   #Call iqtree for the specified alignment
-  iqtree -s alignments/chr$1/chr$1_${file_sp}_to_${file_ep}.phy --no-outfiles -djc -m HKY+G -nt AUTO -pre iqtree/chr$1/chr$1_${file_sp}_to_${file_ep}
+  iqtree -s alignments/chr$1/chr$1_${file_sp}_to_${file_ep}.phy -djc -m HKY+G -nt AUTO -pre iqtree/chr$1/chr$1_${file_sp}_to_${file_ep}
 
 done
