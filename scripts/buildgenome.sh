@@ -77,6 +77,7 @@ for variant in data/quality_variants/quality_variant_*; do
   for i in `seq 1 $numchanges`; do
     change_i=$(echo $changes | cut -d ',' -f $i )
     position=$(echo $change_i | cut -d ':' -f 1 )
+    let "position=position-$2" #Need to decrement by starting position
     #old_bp=$(echo $change_i | cut -d ':' -f 2 )
     new_bp=$(echo $change_i | cut -d ':' -f 3 )
 
