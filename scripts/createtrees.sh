@@ -30,7 +30,8 @@ fi
     #iqtree -s $alignment_fname --no-outfiles -djc -m HKY+G -nt AUTO -pre ../iqtree
 
 #Construct the blocks using makeblocks.sh
-#bash scripts/makeblocks.sh $1 $2 $3
+#only runs if they don't exist
+bash scripts/makeblocks.sh $1 $2 $3
 
 #Calculate starting position - used to determine which file to use
 ((ct_sp=(($2-1)*10000)+1))
@@ -67,4 +68,4 @@ done
 
 #Clean up the output
 mkdir -p iqtree/chr$1/log
-mv iqtree/chr$1/*.log iqtree/chr$1/*.ckp.gz iqtree/chr$1/*.uniqueseq.phy iqtree/chr$1/*.iqtree iqtree/chr$1/log
+mv -f iqtree/chr$1/*.log iqtree/chr$1/*.ckp.gz iqtree/chr$1/*.uniqueseq.phy iqtree/chr$1/*.iqtree iqtree/chr$1/log
