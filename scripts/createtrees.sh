@@ -64,3 +64,7 @@ for index in `seq $ct_sp 10000 $ct_ep`; do
   iqtree/bin/iqtree -s alignments/chr$1/chr$1_${file_sp}_to_${file_ep}.phy -djc -m HKY+G -nt AUTO -pre iqtree/chr$1/chr$1_${file_sp}_to_${file_ep}
 
 done
+
+#Clean up the output
+mkdir -p iqtree/chr$1/log
+mv iqtree/chr$1/*.log iqtree/chr$1/*.ckp.gz iqtree/chr$1/*.uniqueseq.phy iqtree/chr$1/*.iqtree iqtree/chr$1/log
