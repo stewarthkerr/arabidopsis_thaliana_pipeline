@@ -49,17 +49,24 @@ for index in `seq $ct_sp 10000 $ct_ep`; do
 
   #Check to make sure we have enough bp in chromosome
   if [[ ($index -gt $lastbp) ]]; then
-    echo Last tree for this chromosome has been constructed; exit 1;
+    echo Last tree for this chromosome has been constructed; break
   fi
 
-  #Print message to screen to show that it's working
+  #Handle filename
   file_sp=$(printf %08d $index)
   ((end_index=index+9999))
   if [[ ($end_index -gt $lastbp) ]]; then #Handles the last tree
     end_index=$lastbp
   fi
   file_ep=$(printf %08d $end_index)
+
+  #Check to make sure the .treefile doesn't already exist
+  if [[ -s iqtree/chr$1/chr$1_${file_sp}_to_${file_ep}.treefile ]]; then
+    echo chr$1_${file_sp}_to_${file_ep}.treefile already exists. Continuing to next tree.
+    continue
+  else
   echo Constructing tree chr${1}_${file_sp}_to_${file_ep}
+  fi
 
   #Call iqtree for the specified alignment
   iqtree/bin/iqtree -s alignments/chr$1/chr$1_${file_sp}_to_${file_ep}.phy -djc -m HKY+G -nt AUTO -pre iqtree/chr$1/chr$1_${file_sp}_to_${file_ep}
