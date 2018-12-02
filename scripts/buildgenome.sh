@@ -47,9 +47,14 @@ done
 pad_sp=$(printf %08d $2)
 pad_ep=$(printf %08d $ep)
 #Create the .phy file which will hold the genome -- pad to 8 digits
-#Note that if the file already exists, then this will delete the old file
+#If the file already exists, we will exit
 mkdir -p alignments/chr${1}
-truncate -s 0 alignments/chr${1}/chr${1}_${pad_sp}_to_${pad_ep}.phy
+if [ -s alignments/chr${1}/chr${1}_${pad_sp}_to_${pad_ep}.phy ]; then
+  echo File chr${1}_${pad_sp}_to_${pad_ep}.phy already exists -- exiting
+  exit 1 #This file already exists and has data, don't overwrite
+else
+  truncate -s 0 alignments/chr${1}/chr${1}_${pad_sp}_to_${pad_ep}.phy
+fi
 
 ((num_variant = 0))
 #Create line for each variant by editing reference genome
@@ -77,6 +82,7 @@ for variant in data/quality_variants/quality_variant_*; do
   for i in `seq 1 $numchanges`; do
     change_i=$(echo $changes | cut -d ',' -f $i )
     position=$(echo $change_i | cut -d ':' -f 1 )
+    let "position=position-$2" #Need to decrement by starting position
     #old_bp=$(echo $change_i | cut -d ':' -f 2 )
     new_bp=$(echo $change_i | cut -d ':' -f 3 )
 

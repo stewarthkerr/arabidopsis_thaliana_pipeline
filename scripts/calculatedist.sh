@@ -1,11 +1,15 @@
+#!/bin/bash
+#Use dirname to set the wd to where the script is located, and then go up a level
+cd "$(dirname "$0")"/..
 
 # :: step6 calculate distances between all pairs of trees
 # a. between all pairs of trees from the same chromosome, for each chromosome
-# b. between all pairs of trees from consecutive blocks 
+# b. between all pairs of trees from consecutive blocks
 # ::::: (which could be extracted from the larger set of distance values above)
 
 mkdir -p treedist/allblocks
 mkdir -p treedist/consecutiveblocks
+
 
 # create all pairs of trees for a and b.
 
