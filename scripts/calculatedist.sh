@@ -4,25 +4,33 @@
 # b. between all pairs of trees from consecutive blocks 
 # ::::: (which could be extracted from the larger set of distance values above)
 
+mkdir -p treedist/allblocks
+mkdir -p treedist/consecutiveblocks
 
-# a. between all pairs of trees
+# create all pairs of trees for a and b.
 
 for eachtree in iqtree/chrM/chrM*
-    do cat $eachtree >> treedist/chrM-all.tre
+    do cat $eachtree >> treedist/allblocks/chrM-all.tre
+    done
+
+for eachtree in iqtree/chrC/chrC*
+    do cat $eachtree >> treedist/allblocks/chrC-all.tre
+    done
+
+for eachtree in iqtree/chrM/chrM*
+    do cat $eachtree >> treedist/consecutiveblocks/chrM-all.tre
+    done
+
+for eachtree in iqtree/chrC/chrC*
+    do cat $eachtree >> treedist/consecutiveblocks/chrC-all.tre
     done
 
 
-# check only with the first two trees from chrM
-temp2=$(ls iqtree/chrM/chrM* | head -n 2)
+# calculate distances between all pairs of trees
+# for a
+iqtree -t treedist/allblocks/chrM-all.tre -rf_all -nt AUTO
+iqtree -t treedist/allblocks/chrC-all.tre -rf_all -nt AUTO
 
-for eachtree in $temp2
-    do cat $eachtree >> treedist/chrM-firstwo.tre
-    done
-
-
-# measure distrances between all pairs of trees
-iqtree -t treedist/chrM-all.tre -rf_adj -nt AUTO --no-outfiles -quiet
- # ERROR: Tree has different number of taxa!
-
-iqtree -t treedist/chrM-firstwo.tre -rf_adj -nt AUTO --no-outfiles -quiet 
- # ERROR: Tree has different number of taxa!
+# for b
+iqtree -t treedist/consecutiveblocks/chrM-all.tre -rf_adj -nt AUTO --no-outfiles -quiet
+iqtree -t treedist/consecutiveblocks/chrC-all.tre -rf_adj -nt AUTO --no-outfiles -quiet
