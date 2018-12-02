@@ -1,28 +1,28 @@
+#!/bin/bash
+#Use dirname to set the wd to where the script is located, and then go up a level
+cd "$(dirname "$0")"/..
 
 # :: step6 calculate distances between all pairs of trees
 # a. between all pairs of trees from the same chromosome, for each chromosome
-# b. between all pairs of trees from consecutive blocks 
+# b. between all pairs of trees from consecutive blocks
 # ::::: (which could be extracted from the larger set of distance values above)
 
+if [ "$#" -lt 1 ]; then
+  echo "calculatedist.sh: an argument for chromosome must be provided"; exit 1
+elif [[ !("$1" =~ ^(1|2|3|4|5|C|M)$) ]]; then
+  echo "argument 1 must be one of 12345, C or M"; exit 1
+fi
 
-# a. between all pairs of trees
+#Overwrite old all-tree file
+truncate -s 0 treedist/chr$1-all.tre
 
-for eachtree in iqtree/chrM/chrM*
-    do cat $eachtree >> treedist/chrM-all.tre
-    done
+# Create file for iqtree by concatenating all trees
+for eachtree in iqtree/chr$1/*.treefile
+    do cat $eachtree >> treedist/chr$1-all.tre
+done
 
+# measure distances between all pairs of trees
+iqtree -t treedist/chr$1-all.tre -rf_all -nt AUTO --no-outfiles -pre treedist/allblocks/all_chr$1
 
-# check only with the first two trees from chrM
-temp2=$(ls iqtree/chrM/chrM* | head -n 2)
-
-for eachtree in $temp2
-    do cat $eachtree >> treedist/chrM-firstwo.tre
-    done
-
-
-# measure distrances between all pairs of trees
-iqtree -t treedist/chrM-all.tre -rf_adj -nt AUTO --no-outfiles -quiet
- # ERROR: Tree has different number of taxa!
-
-iqtree -t treedist/chrM-firstwo.tre -rf_adj -nt AUTO --no-outfiles -quiet 
- # ERROR: Tree has different number of taxa!
+# measure distance between adjacent trees
+iqtree -t treedist/chr$1-all.tre -rf_adj -nt AUTO --no-outfiles -pre treedist/consecutiveblocks/consecutive_chr$1
