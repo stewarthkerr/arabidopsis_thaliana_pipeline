@@ -20,6 +20,18 @@ elif [[ !("$1" =~ ^(2|C|M)$) ]]; then
   echo "calculatedist.sh: argument 1 must be one of 2, C or M"; exit 1
 fi
 
+if [  -f "treedist/allblocks/chr$1-all.tre" ] 
+# if the file with chr$1-all.tre exists, remove the file.
+then 
+  rm "treedist/allblocks/chr$1-all.tre"
+fi
+
+if [  -f "treedist/consecutiveblocks/chr$1-cnsc.tre" ] 
+# if the file with chr$1-cnsc.tre exists, remove the file.
+then 
+  rm "treedist/consecutiveblocks/chr$1-cnsc.tre"
+fi
+
 
 # create fils with all trees for a and b, respectively. The output is the same but with different names.
 for eachtree in iqtree/chr${1}/chr${1}*
