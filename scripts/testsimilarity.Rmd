@@ -11,9 +11,9 @@ output: html_document
 
 # ::: Set the main directory in "treedist" for step 7
 mainDir <- "../treedist" 
-  # Change the directory to let the working directory "treedist."
-  # For example, mainDir <- ".../project-team-12/treedist"
-  # You can type getwd() to find your current working directory.
+# Change the directory to let the working directory "treedist."
+# For example, mainDir <- ".../project-team-12/treedist"
+# You can type getwd() to find your current working directory.
 
 allDir <- "allblocks"
 cnscDir <- "consecutiveblocks"
@@ -54,7 +54,7 @@ chrM.all.D <- chrM.all.rfdist[lower.tri(chrM.all.rfdist)]
 
 ```{r }
 
-# Set the working directory for a
+# Set the working directory for b
 setwd(file.path(mainDir, cnscDir))
 
 # Load data
@@ -116,6 +116,7 @@ hist(chrM.cnsc.D, main="Density of Chr. M with consec. blocks", xlab="Chromosome
 S = seq(from=round(216-3-max(chrM.cnsc.D)/2), to=round(216-3-min(chrM.cnsc.D)/2), by=1)
 lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), col="red")
 
+# Mean
 mean.dist <- rbind(cbind(mean(chr2.all.D), mean(chr2.cnsc.D)),
            cbind(mean(chrC.all.D), mean(chrC.cnsc.D)),
            cbind(mean(chrM.all.D), mean(chrM.cnsc.D)))

@@ -5,83 +5,92 @@
 # clear environment
 rm(list=ls())
 
-# please install qqplot2 package if you don't have it on your computer
-# install.packages("ggplot2")
-# install.packages("stringr")
-library(ggplot2)
-library(stringr)
-library(reshape2)
+#### Processing data
+# ::: Set the main directory in "treedist" for step 7
 setwd("../treedist")
 
-# please check "fake-chr4-all.tre" and "fake-chr4-adj.tre" in the folder of "treedist"
-# "fake-chr4-all.tre" is as follows:
-# 4 4
-# Tree0       0 0 2 1
-# Tree1       0 0 2 1
-# Tree2       2 2 0 1
-# Tree3       1 1 1 0
+# Load data
+chr2.all.tre <- read.table("allblocks/chr2-all.tre")
+chrC.all.tre <- read.table("allblocks/chrC-all.tre")
+chrM.all.tre <- read.table("allblocks/chrM-all.tre")
 
-# "fake-chr4-adj.tre" is as follows:
-# XXX        1 4
-# 0 2 1 0
+#chr2.all.rfdist
+chr2.all.rfdist <- read.table("allblocks/chr2-all.tre.rfdist", skip=1, row.names = 1)
 
-all.tre <- read.table("fake-chr4-all.tre")
-rfdist <- read.table("fake-chr4-all.tre.rfdist", skip=1, row.names = 1)
-colnames(rfdist) <-row.names(rfdist)
-rfdist
+#chrC.all.rfdist
+chrC.all.rfdist <- read.table("allblocks/chrC-all.tre.rfdist", skip=1, row.names = 1)
 
-adj.rfdist <- read.table("fake-chr4-adj.tre.rfdist", row.names=NULL)
-adj.rfdist
+#chrM.all.rfdist
+chrM.all.rfdist <- read.table("allblocks/chrM-all.tre.rfdist", skip=1, row.names = 1)
 
-# :::::::::::::
-# :::: A ::::::
-# :::::::::::::
+# 1) find D, distances between all pairs of trees.
+chr2.all.D <- chr2.all.rfdist[lower.tri(chr2.all.rfdist)]
+chrC.all.D <- chrC.all.rfdist[lower.tri(chrC.all.rfdist)]
+chrM.all.D <- chrM.all.rfdist[lower.tri(chrM.all.rfdist)]
 
 
-# ::: 1. find n
-# # way 1
-# n <- dim(read.table("fake-chr4-all.tre", sep=","))[2]
-# # way 2
-# n <- read.table("fake-chr4-all.tre.rfdist", nrows=1)[1,2]
+# Load data
+chr2.cnsc.tre <- read.table("consecutiveblocks/chr2-cnsc.tre")
+chrC.cnsc.tre <- read.table("consecutiveblocks/chrC-cnsc.tre")
+chrM.cnsc.tre <- read.table("consecutiveblocks/chrM-cnsc.tre")
 
-n <- str_count(all.tre[1],",") + 1
+#chr2.cnsc.rfdist
+chr2.cnsc.rfdist <- read.table("consecutiveblocks/chr2-cnsc.tre.rfdist", skip=1)
 
-# ::: 2. find observed distance
-# find distances between all pairs of trees.
-distance <- rfdist[lower.tri(rfdist)]
+#chrC.cnsc.rfdist
+chrC.cnsc.rfdist <- read.table("consecutiveblocks/chrC-cnsc.tre.rfdist", skip=1)
 
-# ::: 3. find D
-set.seed(42)
-S <- rpois(length(distance), 1/8) 
-D <- 2*(n-3-S)
+#chrM.cnsc.rfdist
+chrM.cnsc.rfdist <- read.table("consecutiveblocks/chrM-cnsc.tre.rfdist", skip=1)
 
-# ::: 4. make a graph
-# ggplot(S, aes(x=S)) + geom_histogram(aes(y=..density..), binwidth=0.5, color="black", fill="white") +
-#     geom_density(alpha=.2, fill="#FF6666") + stat_function(fun=dpois, args=list(1/8)) 
-D_distance <- data.frame(D = D, distance = distance)
-D_distance.m <- melt(D_distance)
-ggplot(D_distance.m,aes(x=value, fill=variable)) + geom_density(alpha=0.2)
+# 1) find D, distances between all pairs of trees.
+chr2.cnsc.D <- as.numeric(chr2.cnsc.rfdist[-length(chr2.cnsc.rfdist)])
+chrC.cnsc.D <- as.numeric(chrC.cnsc.rfdist[-length(chrC.cnsc.rfdist)])
+chrM.cnsc.D <- as.numeric(chrM.cnsc.rfdist[-length(chrM.cnsc.rfdist)])
 
-# scale needs to be consistent. histogram's scale is not the density scale. need to check!
+ 
+#### Making plot
+par(mfrow=c(2,3))
+# ::: a :::
 
-# :::::::::::::
-# :::: B ::::::
-# :::::::::::::
+# :: for chromosome 2
+hist(chr2.all.D, main="Density of Chr. 2 with all blocks", xlab="Chromosome 2", prob=TRUE, breaks=30)
+S = seq(from=round(216-3-max(chr2.all.D)/2), to=round(216-3-min(chr2.all.D)/2), by=1)
+lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), col="red")
 
-# ::: 2. find true distance
-adj.distance <- as.numeric(adj.rfdist[-length(adj.rfdist)]) # The last 0 is extra.
+# :: for chromosome C
+hist(chrC.all.D, main="Density of Chr. C with all blocks", xlab="Chromosome C", prob=TRUE, breaks=30)
+S = seq(from=round(216-3-max(chrC.all.D)/2), to=round(216-3-min(chrC.all.D)/2), by=1)
+lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), col="red")
 
-# ::: 3. find D
-set.seed(42)
-adj.S <- rpois(length(adj.distance), 1/8) 
-adj.D <- 2*(n-3-S)
+# :: for chromosome M
+hist(chrM.all.D, main="Density of Chr. M with all blocks", xlab="Chromosome M", prob=TRUE, breaks=30)
+S = seq(from=round(216-3-max(chrM.all.D)/2), to=round(216-3-min(chrM.all.D)/2), by=1)
+lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), col="red")
+
+# ::: b :::
+# :: for chromosome 2
+hist(chr2.cnsc.D, main="Density of Chr. 2 with consec. blocks", xlab="Chromosome 2", prob=TRUE, breaks=30)
+S = seq(from=round(216-3-max(chr2.cnsc.D)/2), to=round(216-3-min(chr2.cnsc.D)/2), by=1)
+lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), col="red")
+
+# :: for chromosome C
+hist(chrC.cnsc.D, main="Density of Chr. C with consec. blocks", xlab="Chromosome C", prob=TRUE, breaks=30)
+S = seq(from=round(216-3-max(chrC.cnsc.D)/2), to=round(216-3-min(chrC.cnsc.D)/2), by=1)
+lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), col="red")
+
+# :: for chromosome M
+hist(chrM.cnsc.D, main="Density of Chr. M with consec. blocks", xlab="Chromosome M", prob=TRUE, breaks=30)
+S = seq(from=round(216-3-max(chrM.cnsc.D)/2), to=round(216-3-min(chrM.cnsc.D)/2), by=1)
+lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), col="red")
+
+# Mean
+mean.dist <- rbind(cbind(mean(chr2.all.D), mean(chr2.cnsc.D)),
+                   cbind(mean(chrC.all.D), mean(chrC.cnsc.D)),
+                   cbind(mean(chrM.all.D), mean(chrM.cnsc.D)))
+colnames(mean.dist) <- c("all blocks", "consec. blocks")
+rownames(mean.dist) <- c("chr. 2", "chr. C", "chr. M")
+mean.dist
 
 
-# ::: 4. make a graph
-adj.D_distance <- data.frame(adj.D = adj.D, adj.distance = adj.distance)
-adj.D_distance.m <- melt(adj.D_distance)
-ggplot(adj.D_distance.m,aes(x=value, fill=variable)) + geom_density(alpha=0.2)
 
-# ggplot(adj.S, aes(x=adj.S)) + geom_histogram(aes(y=..density..), binwidth = 0.1, color="black", fill="white") +
-#   geom_density(alpha=.2, fill="#FF6666") + stat_function(fun=dpois, args=list(1/8)) 
-# scale needs to be consistent. histogram's scale is not the density scale. need to check!
