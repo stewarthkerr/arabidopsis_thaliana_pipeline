@@ -48,8 +48,10 @@ chr2.cnsc.D <- as.numeric(chr2.cnsc.rfdist[-length(chr2.cnsc.rfdist)])
 chrC.cnsc.D <- as.numeric(chrC.cnsc.rfdist[-length(chrC.cnsc.rfdist)])
 chrM.cnsc.D <- as.numeric(chrM.cnsc.rfdist[-length(chrM.cnsc.rfdist)])
 
- 
+
 #### Making plot
+png("../results_summary/step7_distributions.png",height = 800, width = 1000)
+
 par(mfrow=c(2,3))
 # ::: a :::
 
@@ -83,6 +85,8 @@ lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), col="red")
 hist(chrM.cnsc.D, main="Density of Chr. M with consec. blocks", xlab="Chromosome M", prob=TRUE, breaks=30)
 S = seq(from=round(216-3-max(chrM.cnsc.D)/2), to=round(216-3-min(chrM.cnsc.D)/2), by=1)
 lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), col="red")
+
+dev.off()
 
 # Mean
 mean.dist <- rbind(cbind(mean(chr2.all.D), mean(chr2.cnsc.D)),

@@ -23,13 +23,15 @@ a. Are the observed tree distances closer to 0 than expected if the 2 trees were
 b. Do trees from 2 consecutive blocks tend to be more similar to each other (at smaller distance) than trees from 2 randomly chosen blocks from the same chromosome? 
 
 **Example**:  
-Open R / R studio or run following command if you have R/rstudio in your environment:
-```
-R calculatedist.R
-rstudio calculatedist.Rmd
-```
+Open R studio run testsimilarity.Rmd(R markdown file).  
+Output "step7_results.html" will be stored in folder "results_summary".  
 
-Output "step7_results.html" will be stored in folder "results_summary".
+Open R or run following command if you have R/rstudio in your environment:
+```
+Rscript testsimilarity.R
+```
+Output plots will be stored in folder "results_summary".
+
 
 
 
