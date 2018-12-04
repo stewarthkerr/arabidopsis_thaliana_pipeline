@@ -3,7 +3,7 @@ title: "Step 7: Test for Similarity"
 knit: (function(inputFile, encoding) {
       rmarkdown::render(inputFile, 
       encoding = encoding, 
-      output_file = '../data_summary/step7_results.html')})
+      output_file = '../results_summary/step7_results.html')})
 output: html_document
 ---
 
