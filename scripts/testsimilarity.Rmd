@@ -1,0 +1,146 @@
+---
+title: "Step 7: Test for Similarity"
+knit: (function(inputFile, encoding) {
+      rmarkdown::render(inputFile, 
+      encoding = encoding, 
+      output_file = '../results_summary/step7_results.html')})
+output: html_document
+---
+
+## Questions:
+
+**a.** Are the observed tree distances closer to 0 than expected if the 2 trees were chosen at random uniformly? We would think so, if each plant was from a distinct population and if populations did not mix.
+
+**b.** Do trees from 2 consecutive blocks tend to be more similar to each other (at smaller distance) than trees from 2 randomly chosen blocks from the same chromosome? We would expect so if blocks were small, due to less "recombination" between neighboring blocks than between blocks at opposing ends of the chromosome.
+
+### 1. Set the main and working directories
+
+```{r setup, warning=FALSE}
+
+# Set the main directory in "treedist" for step 7
+mainDir <- "../treedist" 
+# Change the directory to let the working directory "treedist."
+# For example, mainDir <- ".../project-team-12/treedist"
+# You can type getwd() to find your current working directory.
+
+allDir <- "allblocks"
+cnscDir <- "consecutiveblocks"
+
+```
+
+### 2. Load data about distance results from step6
+
+```{r load data a}
+
+# Set the working directory for a
+setwd(file.path(mainDir, allDir))
+
+# Load data about distance results between all pairs of trees from chr. 2, C, and M, respectively. 
+chr2.all.rfdist <- read.table("chr2-all.tre.rfdist", skip=1, row.names = 1)
+chrC.all.rfdist <- read.table("chrC-all.tre.rfdist", skip=1, row.names = 1)
+chrM.all.rfdist <- read.table("chrM-all.tre.rfdist", skip=1, row.names = 1)
+```
+```{r load data b}
+# Set the working directory for b
+setwd(file.path(mainDir, cnscDir))
+
+# Load data about distance results between all pairs of trees from chr. 2, C, and M, respectively. 
+chr2.cnsc.rfdist <- read.table("chr2-cnsc.tre.rfdist", skip=1)
+chrC.cnsc.rfdist <- read.table("chrC-cnsc.tre.rfdist", skip=1)
+chrM.cnsc.rfdist <- read.table("chrM-cnsc.tre.rfdist", skip=1)
+
+```
+
+### 3. Create variables about unrepeated distance results.
+
+```{r }
+
+# Find D, distances between all pairs of trees for each chromosome.
+chr2.all.D <- chr2.all.rfdist[lower.tri(chr2.all.rfdist)]
+chrC.all.D <- chrC.all.rfdist[lower.tri(chrC.all.rfdist)]
+chrM.all.D <- chrM.all.rfdist[lower.tri(chrM.all.rfdist)]
+
+# Find D, distances between all pairs of trees from consecutive blocks for each chromosome.
+chr2.cnsc.D <- as.numeric(chr2.cnsc.rfdist[-length(chr2.cnsc.rfdist)])
+chrC.cnsc.D <- as.numeric(chrC.cnsc.rfdist[-length(chrC.cnsc.rfdist)])
+chrM.cnsc.D <- as.numeric(chrM.cnsc.rfdist[-length(chrM.cnsc.rfdist)])
+
+```
+
+
+### 4. Create plots about distance measures of each chromosome for a and b.
+```{r,  include=FALSE, echo=FALSE, fig.show='hide'}
+# Change density scales for chromosome D.
+h1 <- hist(chrM.all.D, prob=T)
+h1$counts <- h1$counts/sum(h1$counts)
+
+h2 <- hist(chrM.cnsc.D, prob=T)
+h2$counts <- h2$counts/sum(h2$counts)
+
+```
+
+```{r, fig.width=11, fig.height=8, warning=FALSE}
+
+par(mfrow=c(2,3))
+
+# ::: a :::
+# for chromosome 2
+hist(chr2.all.D, main="Distance density for Chr. 2 with all blocks", xlab="Chromosome 2", col=rgb(1,0,0,0.2), prob=TRUE, breaks=30)
+S = seq(from=round(217-3-max(chr2.all.D)/2), to=round(217-3-min(chr2.all.D)/2), by=1)
+lines(x=I(2*(217-3-S)), y=dpois(S, lambda=1/8), lwd=2)
+abline(v=mean(chr2.all.D), col="red", lty=3, lwd=2)
+text(mean(chr2.all.D)-30,0.04, paste0("mean= ", round(mean(chr2.all.D),3)))
+legend("topleft", c("Expected Distance", "Mean"), col=c("black", "red"), lty=c(1, 3), lwd=c(2 ,2))
+
+
+# for chromosome C
+hist(chrC.all.D, main="Distance density for Chr. C with all blocks", xlab="Chromosome C", col=rgb(1,0,0,0.2), prob=TRUE, breaks=30)
+S = seq(from=round(216-3-max(chrC.all.D)/2), to=round(216-3-min(chrC.all.D)/2), by=1)
+lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), lwd=2)
+abline(v=mean(chrC.all.D), col="red", lty=3, lwd=2)
+text(mean(chrC.all.D)-10,0.1, paste0("mean= ", round(mean(chrC.all.D),3)))
+legend("topleft", c("Expected Distance", "Mean"), col=c("black", "red"), lty=c(1, 3), lwd=c(2 ,2))
+
+
+# for chromosome M
+plot(h1, main="Distance density for Chr. M with all blocks", xlab="Chromosome M", col=rgb(1,0,0,0.2), breaks=10, ylab="Density")
+S = seq(from=round(216-3-max(chrM.all.D)/2), to=round(217-3-min(chrM.all.D)/2), by=1)
+lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), lwd=2)
+abline(v=mean(chrM.all.D), col="red", lty=3, lwd=2)
+text(mean(chrM.all.D)-1.2,0.6, paste0("mean= ", round(mean(chrM.all.D),3)))
+legend("topleft", c("Expected Distance", "Mean"), col=c("black", "red"), lty=c(1, 3), lwd=c(2 ,2))
+
+
+# ::: b :::
+# for chromosome 2
+hist(chr2.cnsc.D, main="Distance density for Chr. 2 with consec. blocks", xlab="Chromosome 2", col=rgb(1,0,0,0.2), prob=TRUE, breaks=30)
+S = seq(from=round(217-3-max(chr2.cnsc.D)/2), to=round(217-3-min(chr2.cnsc.D)/2), by=1)
+lines(x=I(2*(217-3-S)), y=dpois(S, lambda=1/8), lwd=2)
+abline(v=mean(chr2.cnsc.D), col="red", lty=3, lwd=2)
+text(mean(chr2.cnsc.D)-30,0.015, paste0("mean= ", round(mean(chr2.cnsc.D),3)))
+legend("topleft", c("Expected Distance", "Mean"), col=c("black", "red"), lty=c(1, 3), lwd=c(2 ,2))
+
+# for chromosome C
+hist(chrC.cnsc.D, main="Distance density for Chr. C with consec. blocks", xlab="Chromosome C", col=rgb(1,0,0,0.2), prob=TRUE, breaks=30)
+S = seq(from=round(216-3-max(chrC.cnsc.D)/2), to=round(216-3-min(chrC.cnsc.D)/2), by=1)
+lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), lwd=2)
+abline(v=mean(chrC.cnsc.D), col="red", lty=3, lwd=2)
+text(mean(chrC.cnsc.D)+9.2,0.08, paste0("mean= ", round(mean(chrC.cnsc.D),3)))
+legend("topleft", c("Expected Distance", "Mean"), col=c("black", "red"), lty=c(1, 3), lwd=c(2 ,2))
+
+# for chromosome M
+plot(h2, main="Distance density for Chr. M with consec. blocks", xlab="Chromosome M", col=rgb(1,0,0,0.2), breaks=10, ylab="Density")
+S = seq(from=round(216-3-max(chrM.cnsc.D)/2), to=round(216-3-min(chrM.cnsc.D)/2), by=1)
+lines(x=I(2*(216-3-S)), y=dpois(S, lambda=1/8), lwd=2)
+abline(v=mean(chrM.cnsc.D), col="red", lty=3, lwd=2)
+text(mean(chrM.cnsc.D)-1.2, 0.6, paste0("mean= ", round(mean(chrM.cnsc.D),3)))
+legend("topleft", c("Expected Distance", "Mean"), col=c("black", "red"), lty=c(1, 3), lwd=c(2 ,2))
+
+
+
+```
+
+
+**(a)** We think that the observed tree distances are closer to 0 than expected if two trees were chosen randomly. This is because when we compare the density of the observed tree distances with that of the expected distances (see the top three plots), the observed tree distances have a higher density in relatively smaller values of distance measures. This implies the observed tree distances are smaller than the expected distances on average.
+
+**(b)** We think that trees from two consecutive blocks tend to be more similar to each other. This is because when we compare the top three plots with the bottom three plots, the observed tree distances from two consecutive blocks are smaller than those from all blocks on average. In addition, the mean observed distances with consecutive blocks are smaller than those with all blocks. The greatest mean difference is found with chr. 2, while the mean difference is very small with chr. M. However, we found clear differences in density, even for chr. M.
