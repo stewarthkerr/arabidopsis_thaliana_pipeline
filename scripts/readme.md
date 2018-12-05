@@ -10,41 +10,72 @@
 ```
 bash getdata.sh
 ```
-The dowanloaded data will be saved in a new folder "data".  
-The SNP data will be saved in folder "data/quality_variants".  
-The reference genome data will be in folder "data/reference".  
+The dowanloaded data will be saved in a new folder named "data".  
+The SNP data will be saved in the folder "data/quality_variants".  
+The reference genome data will be saved in the folder "data/reference".  
+
+
 
 ## Step 3: Build individual genomes
 **Script name**: buildgenome.sh.  
-**Description**:   
-
+**Description**: run this script to get an alignment of the DNA sequences of all strains for a chromosome of interest and for a genomic range of interest.  
 **Example**:  
 Input argument:  
 (1) index for chromosome (e.g. 1-5, C or M)  
-(2) starting base postion (e.g. 1,2,...20000,... 0 is not included))  
+(2) starting base postion (e.g. 1,2,...20000,... 0 is not included)  
 (3) ending base position (e.g. 1000)  
+For example, the following command
 ```
-bash buildgenome.sh 1 20 2000
+bash buildgenome.sh 1 997 1006
 ```
-Outputfiles will be saved in folder "alignments".  
+will produce
+```
+216 10
+Aa_0 ATTTGGTTAT
+Abd_0 AATTGGTTAT
+...
+...
+```
+Output phylip files will be saved in the folder "alignments/'subfolder'" (the subfolder e.g. "chr1" for each chromosome will be created automatically).
+
+
 
 ### Step 4: Create non-overlapping alignments blocks  
 **Script name**: makeblocks.sh  
-**Description**: run this script to cut a chromosome into non-overlapping alignments -or blocks- of length 10,000 base pairs (except for the last one). 
+**Description**: run this script to cut a chromosome into non-overlapping alignments or blocks of length 10,000 base pairs (except for the last one). 
 
 **Example**:  
 Input argument:  
 (1) index for chromosome (e.g. 1-5, C or M)  
 (2) starting block index (e.g. 1,2,...1858,... 0 is not included)  
 (3) number of blocks (e.g. 1,2,...)  
+For example, the following command
 ```
 bash buildgenome.sh 1 1 20
 ```
-Output block files will be saved in 
+will produce 1st to 20th block files for chromosome 1.  
+Output block files will be saved in folder "alignments/subfolder" (the subfolder e.g. "chr2" for each chromosome will be created automatically).
 
-## Step5: Get a tree for each block
-**Script name**: createtrees.sh
-**Description**: run this script to
+
+
+## Step5: Get a tree for each block  
+**Script name**: createtrees.sh  
+**Description**: run this script to analyze each block and estimate a tree that describes the genealogy of the plants, based on their DNA.  In order to run this script successully, you have to install IQ-TREE first and add it to envrionment path.
+
+**Example**:  
+Input argument:  
+(1) index for chromosome (e.g. 1-5, C or M)  
+(2) starting block index (e.g. 1,2,...1858,... 0 is not included)  
+(3) number of blocks (e.g. 1,2,...)  
+For example, the following command
+```
+bash buildgenome.sh 1 1 20
+```
+will produce 1st to 20th block files for chromosome 1 and create the tree for each block.   
+Output block files will be saved in folder "alignments/subfolder" (the subfolder e.g. "chr2" for each chromosome will be created automatically).
+Output tree file will be saved in the folder "iqtree".  
+
+
 
 
 ## Step 6: Calculate distances between all pairs of trees  
@@ -62,6 +93,7 @@ Output rfdist files for a will be saved in folder "treedist/allblocks".
 Output rfdist files for b will be saved in folder "treedist/consecutiveblocks".  
 
 
+
 ## Step 7: Test for tree similarity  
 **Script name**: testsimilarity.Rmd (testsimilarity.R).  
 **Description**: run this script to see the answers following question.  
@@ -77,7 +109,3 @@ Open R or run following command if you have R/rstudio in your environment:
 Rscript testsimilarity.R
 ```
 Output plots will be saved in folder "results_summary".
-
-
-
-
