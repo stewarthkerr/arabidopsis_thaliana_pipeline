@@ -5,7 +5,7 @@
 (2) The file name of downloaded file of strain named "Li_2:1" was automatically changed due to the ":". And we renamed it to "quality_variant_Li_2_1.txt".
 
 * Number of files and size range  
-Numer: 216.
+Numer: 216.  
 Size range: the min size is 7624 and the max size is 33916.
 
 
