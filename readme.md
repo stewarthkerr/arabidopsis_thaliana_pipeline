@@ -1,6 +1,6 @@
 ### STAT 679 Final project
 ### Project team: 12
-### Contributors: Sterwart Kerr, Youmi Suk, Ruocheng Dong
+### Contributors: Stewart Kerr, Youmi Suk, Ruocheng Dong
 
 ## Introduction
 A data pipeline for performing short analyses to evaluate the variability of the genealogical pattern across the genome of 200+ variants of the *Arabidopsis thaliana* plant was built and used. The overview for this project can be accessed via [the project overview](projectoverview.md). A more detailed outline of each step can be accessed via [stepsinstructions.md](stepsinstructions.md)
