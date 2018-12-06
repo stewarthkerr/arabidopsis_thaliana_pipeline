@@ -6,7 +6,7 @@
 A data pipeline for performing short analyses to evaluate the variability of the genealogical pattern across the genome of 200+ variants of the *Arabidopsis thaliana* plant was built and used. The overview for this project can be accessed via [the project overview](projectoverview.md). A more detailed outline of each step can be accessed via [stepsinstructions.md](stepsinstructions.md)
 
 ## Scripts
-The script for each step can be accessed in script directory. The instruction of runing those scripts are in readme.md under that directory.
+The script for each step can be accessed in the script directory. The instruction for running those scripts are in [readme.md under that directory](scripts/readme.md).
 
 ## Files
 Tree files created from step 5 are in iqtree directory.  
