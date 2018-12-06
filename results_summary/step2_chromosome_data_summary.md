@@ -1,7 +1,7 @@
 ### Step 2: chrmosome data summary
 
 * Files and their sizes  
-Size  File
+Size &nbsp;&nbsp;File  
 30092 TAIR10_chr1.fas  
 19484 TAIR10_chr2.fas  
 23204 TAIR10_chr3.fas  
