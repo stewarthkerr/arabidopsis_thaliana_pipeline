@@ -1,59 +1,23 @@
----
-title: "Step 7: Test for Similarity"
-knit: (function(inputFile, encoding) {
-      rmarkdown::render(inputFile, 
-      encoding = encoding, 
-      output_file = '../results_summary/step7_results.html')})
-output: html_document
----
+#----------------------------#
+# Step 7 Test for similarity
+#----------------------------#
 
-## Questions:
+# clear environment
+rm(list=ls())
 
-**a.** Are the observed tree distances closer to 0 than expected if the 2 trees were chosen at random uniformly? We would think so, if each plant was from a distinct population and if populations did not mix.
-
-**b.** Do trees from 2 consecutive blocks tend to be more similar to each other (at smaller distance) than trees from 2 randomly chosen blocks from the same chromosome? We would expect so if blocks were small, due to less "recombination" between neighboring blocks than between blocks at opposing ends of the chromosome.
-
-### 1. Set the main and working directories
-
-```{r setup, warning=FALSE}
-
-# Set the main directory in "treedist" for step 7
-mainDir <- "../treedist" 
-# Change the directory to let the working directory "treedist."
-# For example, mainDir <- ".../project-team-12/treedist"
-# You can type getwd() to find your current working directory.
-
-allDir <- "allblocks"
-cnscDir <- "consecutiveblocks"
-
-```
-
-### 2. Load data about distance results from step6
-
-```{r load data a}
-
-# Set the working directory for a
-setwd(file.path(mainDir, allDir))
+#### Processing data
+# ::: Set the main directory in "treedist" for step 7
+setwd("../treedist")
 
 # Load data about distance results between all pairs of trees from chr. 2, C, and M, respectively. 
-chr2.all.rfdist <- read.table("chr2-all.tre.rfdist", skip=1, row.names = 1)
-chrC.all.rfdist <- read.table("chrC-all.tre.rfdist", skip=1, row.names = 1)
-chrM.all.rfdist <- read.table("chrM-all.tre.rfdist", skip=1, row.names = 1)
-```
-```{r load data b}
-# Set the working directory for b
-setwd(file.path(mainDir, cnscDir))
+chr2.all.rfdist <- read.table("allblocks/chr2-all.tre.rfdist", skip=1, row.names = 1)
+chrC.all.rfdist <- read.table("allblocks/chrC-all.tre.rfdist", skip=1, row.names = 1)
+chrM.all.rfdist <- read.table("allblocks/chrM-all.tre.rfdist", skip=1, row.names = 1)
 
-# Load data about distance results between all pairs of trees from chr. 2, C, and M, respectively. 
-chr2.cnsc.rfdist <- read.table("chr2-cnsc.tre.rfdist", skip=1)
-chrC.cnsc.rfdist <- read.table("chrC-cnsc.tre.rfdist", skip=1)
-chrM.cnsc.rfdist <- read.table("chrM-cnsc.tre.rfdist", skip=1)
-
-```
-
-### 3. Create variables about unrepeated distance results.
-
-```{r }
+# Load data about distance results between all pairs of trees from chr. 2, C, and M, respectively.
+chr2.cnsc.rfdist <- read.table("consecutiveblocks/chr2-cnsc.tre.rfdist", skip=1)
+chrC.cnsc.rfdist <- read.table("consecutiveblocks/chrC-cnsc.tre.rfdist", skip=1)
+chrM.cnsc.rfdist <- read.table("consecutiveblocks/chrM-cnsc.tre.rfdist", skip=1)
 
 # Find D, distances between all pairs of trees for each chromosome.
 chr2.all.D <- chr2.all.rfdist[lower.tri(chr2.all.rfdist)]
@@ -65,21 +29,16 @@ chr2.cnsc.D <- as.numeric(chr2.cnsc.rfdist[-length(chr2.cnsc.rfdist)])
 chrC.cnsc.D <- as.numeric(chrC.cnsc.rfdist[-length(chrC.cnsc.rfdist)])
 chrM.cnsc.D <- as.numeric(chrM.cnsc.rfdist[-length(chrM.cnsc.rfdist)])
 
-```
 
+#### Making plot
+png("../results_summary/step7_distributions.png",height = 2000, width = 2200)
 
-### 4. Create plots about distance measures of each chromosome for a and b.
-```{r,  include=FALSE, echo=FALSE, fig.show='hide'}
 # Change density scales for chromosome D.
 h1 <- hist(chrM.all.D, prob=T)
 h1$counts <- h1$counts/sum(h1$counts)
 
 h2 <- hist(chrM.cnsc.D, prob=T)
 h2$counts <- h2$counts/sum(h2$counts)
-
-```
-
-```{r, fig.width=11, fig.height=8, warning=FALSE}
 
 par(mfrow=c(2,3))
 
@@ -136,9 +95,6 @@ abline(v=mean(chrM.cnsc.D), col="red", lty=3, lwd=2)
 text(mean(chrM.cnsc.D)-1.2, 0.6, paste0("mean= ", round(mean(chrM.cnsc.D),3)))
 legend("topleft", c("Expected Distance", "Mean"), col=c("black", "red"), lty=c(1, 3), lwd=c(2 ,2))
 
-```
+dev.off()
 
 
-**(a)** We think that the observed tree distances are closer to 0 than expected if two trees were chosen randomly. This is because when we compare the density of the observed tree distances with that of the expected distances (see the top three plots), the observed tree distances have a higher density in relatively smaller values of distance measures. This implies the observed tree distances are smaller than the expected distances on average.
-
-**(b)** We think that trees from two consecutive blocks tend to be more similar to each other. This is because when we compare the top three plots with the bottom three plots, the observed tree distances from two consecutive blocks are smaller than those from all blocks on average. In addition, the mean observed distances with consecutive blocks are smaller than those with all blocks. The greatest mean difference is found with chr. 2, while the mean difference is very small with chr. M. However, we found clear differences in density, even for chr. M.
